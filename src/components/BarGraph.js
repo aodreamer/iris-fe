@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+
 import { Bar, Pie, Line } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
@@ -6,13 +7,14 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const BarGraph = () => {
+  const [selectedBar, setSelectedBar] = useState(null);
   const data = {
     labels: ["1", "2", "3", "4", "5"],
     datasets: [
       {
         label: "Buku",
-        backgroundColor: "#535c6d",
-        borderColor: "#92a4c6",
+        backgroundColor: "#86eea1",
+        borderColor: "#86eea1",
         borderWidth: 1,
         data: [100, 200, 150, 200, 100], // Data untuk bar pertama
         barThickness: 15,
@@ -22,8 +24,8 @@ const BarGraph = () => {
       },
       {
         label: "Pemustaka",
-        backgroundColor: "#6c7a8a",
-        borderColor: "#a0b0c0",
+        backgroundColor: "#507484",
+        borderColor: "#507484",
         borderWidth: 1,
         data: [150, 250, 200, 100, 150], // Data untuk bar kedua
         barThickness: 15,
@@ -33,8 +35,8 @@ const BarGraph = () => {
       },
       {
         label: "Perpustakaan",
-        backgroundColor: "#8a9baf",
-        borderColor: "#b0c0d0",
+        backgroundColor: "#8fbb99",
+        borderColor: "#8fbb99",
         borderWidth: 1,
         data: [200, 150, 250, 300, 200], // Data untuk bar ketiga
         barThickness: 15,
@@ -71,6 +73,24 @@ const BarGraph = () => {
         },
       },
     },
+    onClick: (event, elements) => {
+      if (elements.length > 0) {
+        const element = elements[0];
+        const datasetIndex = element.datasetIndex;
+        const index = element.index;
+        const datasetLabel = data.datasets[datasetIndex].label;
+        const value = data.datasets[datasetIndex].data[index];
+        const label = data.labels[index];
+
+        setSelectedBar({
+          category: label,
+          dataset: datasetLabel,
+          value: value,
+        });
+      } else {
+        setSelectedBar(null);
+      }
+    },
   };
 
   const dataPie = {
@@ -79,7 +99,7 @@ const BarGraph = () => {
       {
         label: "# of Votes",
         data: [12, 19],
-        backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)"],
+        backgroundColor: ["#9650ff", "#6e9aff"],
         borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
         borderWidth: 1,
       },
@@ -133,16 +153,29 @@ const BarGraph = () => {
   return (
     <>
       <div className="h-full row-span-1 text-center text-xl font-bold text-iris-dark-grey bg-iris-grey content-center">KORELASI ANTARA PENDIDIKAN SEKOLAH DASAR DAN LITERASI DIGITAL</div>
-      <div className="row-span-1 rounded-lg"></div>
-      <div className="row-span-5 rounded-lg">
-        <div className="grid grid-cols-3 gap-5">
-          <div className="mx-auto rounded-md">
-            <Bar data={data} options={options} className="mx-auto min-h-52 content-end" />
+      <div className="row-span-6 pt-2 rounded-lg">
+        <div className="grid grid-cols-3 gap-6 px-4 h-full">
+          <div className="rounded-md shadow-md  bg-gray-200 p-4">
+            <Bar data={data} options={options} />
+            {selectedBar && (
+              <div className="mt-4 p-2 bg-gray-100 rounded-md">
+                <h3 className="text-lg font-semibold text-gray-700 mb-2">Rincian Data</h3>
+                <p className="text-gray-600">
+                  <span className="font-semibold">Wilayah:</span> {selectedBar.category}
+                </p>
+                <p className="text-gray-600">
+                  <span className="font-semibold">Jenis Data:</span> {selectedBar.dataset}
+                </p>
+                <p className="text-gray-600">
+                  <span className="font-semibold">Nilai:</span> {selectedBar.value}
+                </p>
+              </div>
+            )}
           </div>
-          <div className="mx-auto rounded-md">
+          <div className="rounded-md shadow-md  bg-gray-200 p-4">
             <Pie data={dataPie} options={optionsPie} plugins={[ChartDataLabels]} />
           </div>
-          <div className="mx-auto rounded-md">
+          <div className="rounded-md shadow-md  bg-gray-200 p-4">
             <Line data={dataLine} options={optionsLine} />
           </div>
         </div>

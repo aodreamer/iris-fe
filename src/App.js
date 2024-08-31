@@ -10,6 +10,7 @@ import PieChart from "./components/PieChart";
 import ChatGPT from "./components/ChatGPT";
 import ChatPopup from "./components/ChatPopup";
 import WebView from "./components/WebView";
+import ExecutiveSummary from "./components/ExecutiveSummary";
 
 function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -26,12 +27,12 @@ function App() {
 
   return (
     <div className="h-screen flex flex-col">
-      <div className="flex-none p-2 px-5 bg-white text-black">
+      <div className="flex-none p-2 px-5 bg-slate-300 text-black">
         <Header />
       </div>
-      <div className="flex-grow grid grid-cols-2">
-        <div className="grid col-span-2">
-          <div className="grid grid-cols-2 grid-rows-2 gap-1 pt-1 px-5 pb-5 bg-white text-black">
+      <div className="flex-grow grid grid-cols-2 bg-slate-300">
+        <div className="grid col-span-2 bg-slate-300">
+          <div className="grid grid-cols-2 grid-rows-2 gap-1 pt-1 px-5 pb-5 bg-slate-300 text-black">
             <div className="grid grid-rows-8 col-span-1 row-span-1 bg-white rounded-lg">
               <MapJabar />
             </div>
@@ -56,11 +57,9 @@ function App() {
           <ChatGPT apiKey={apiKey} />
         </div> */}
         <div>
+          <ExecutiveSummary />
           <ChatPopup />
         </div>
-      </div>
-      <div className="flex-none px-5 bg-white text-black">
-        <Header />
       </div>
     </div>
   );

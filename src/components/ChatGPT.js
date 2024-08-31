@@ -28,23 +28,18 @@ const ChatGPT = ({ apiKey }) => {
 
     try {
       const response = await axios.post(
-        "https://dashscope-intl.aliyuncs.com/api/v1/apps/8bf6424925ae4c67bf92d0fe4d8e134d/completion",
+        "http://127.0.0.1:5000/middleware",
         {
-          input: {
-            prompt: input, // Menggunakan input sebagai prompt
-          },
-          parameters: {},
-          debug: {},
+          prompt: input, // Mengirim prompt secara langsung
         },
         {
           headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
+            "Content-Type": "application/json", // Hanya perlu Content-Type
           },
         }
       );
 
-      const reply = response.data.output; // Menyesuaikan pengambilan respons
+      const reply = response.data.output.text; // Mengambil teks dari respons
       setMessages([...updatedMessages, { role: "assistant", content: reply }]);
     } catch (error) {
       console.error("Error:", error);

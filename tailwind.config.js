@@ -5,8 +5,8 @@ module.exports = {
     extend: {
       colors: {
         "iris-purple": "#677cf3",
-        "iris-blue": "#5ce1e6",
-        "iris-grey": "#92a4c6",
+        "iris-blue": "#5cele6",
+        "iris-grey": "#6482f4",
         "iris-dark-grey": "#535c6d",
       },
     },

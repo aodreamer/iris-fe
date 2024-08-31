@@ -9,21 +9,6 @@ const Header = () => {
           <ul className="flex space-x-4">
             <li>
               <a href="#" className="hover:text-blue-400">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-blue-400">
-                Reports
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-blue-400">
-                Settings
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-blue-400">
                 Logout
               </a>
             </li>
