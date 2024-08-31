@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const ChatGPT = ({ apiKey }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+
+  // Load messages from localStorage when component mounts
+  useEffect(() => {
+    const savedMessages = localStorage.getItem("chatMessages");
+    if (savedMessages) {
+      setMessages(JSON.parse(savedMessages));
+    }
+  }, []);
+
+  // Save messages to localStorage whenever messages change
+  useEffect(() => {
+    localStorage.setItem("chatMessages", JSON.stringify(messages));
+  }, [messages]);
 
   const handleSendMessage = async () => {
     if (input.trim() === "") return;
@@ -15,10 +28,13 @@ const ChatGPT = ({ apiKey }) => {
 
     try {
       const response = await axios.post(
-        "https://api.openai.com/v1/chat/completions",
+        "https://dashscope-intl.aliyuncs.com/api/v1/apps/8bf6424925ae4c67bf92d0fe4d8e134d/completion",
         {
-          model: "gpt-3.5-turbo",
-          messages: updatedMessages,
+          input: {
+            prompt: input, // Menggunakan input sebagai prompt
+          },
+          parameters: {},
+          debug: {},
         },
         {
           headers: {
@@ -28,8 +44,8 @@ const ChatGPT = ({ apiKey }) => {
         }
       );
 
-      const reply = response.data.choices[0].message;
-      setMessages([...updatedMessages, reply]);
+      const reply = response.data.output; // Menyesuaikan pengambilan respons
+      setMessages([...updatedMessages, { role: "assistant", content: reply }]);
     } catch (error) {
       console.error("Error:", error);
     }
