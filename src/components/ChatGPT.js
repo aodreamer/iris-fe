@@ -7,7 +7,7 @@ const ChatGPT = ({ apiKey }) => {
   const [input, setInput] = useState("");
   const [attachment, setAttachment] = useState(null);
 
-  const [fixPrompts, setFixPrompts] = useState(["Fix Prompt 1", "Fix Prompt 2", "Fix Prompt 3"]);
+  const [fixPrompts, setFixPrompts] = useState(["Berapa total siswa di kabupaten bogor", "Berapa jumlah siswa mengulang di kabupaten bogor", "Sebutkan data lokasi, indeks prestasi, dan jumlah siswa di kabupaten bogor"]);
 
   useEffect(() => {
     const savedMessages = localStorage.getItem("chatMessages");
