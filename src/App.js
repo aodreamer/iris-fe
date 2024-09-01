@@ -11,6 +11,7 @@ import ChatGPT from "./components/ChatGPT";
 import ChatPopup from "./components/ChatPopup";
 import WebView from "./components/WebView";
 import ExecutiveSummary from "./components/ExecutiveSummary";
+import { MapProvider } from "./contexts/MapContext"; // Import the context provider
 
 function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -32,30 +33,24 @@ function App() {
       </div>
       <div className="flex-grow grid grid-cols-2 bg-slate-300">
         <div className="grid col-span-2 bg-slate-300">
-          <div className="grid grid-cols-2 grid-rows-2 gap-1 pt-1 px-5 pb-5 bg-slate-300 text-black">
-            <div className="grid grid-rows-8 col-span-1 row-span-1 bg-white rounded-lg">
-              <MapJabar />
+          <MapProvider>
+            <div className="grid grid-cols-2 grid-rows-2 gap-1 pt-1 px-5 pb-5 bg-slate-300 text-black">
+              <div className="grid grid-rows-8 col-span-1 row-span-1 bg-white rounded-lg">
+                <MapJabar />
+              </div>
+              <div className="grid grid-rows-8 col-span-1 row-span-1 bg-white rounded-lg">
+                <WebView url="https://isa.ebdesk.com/" />
+              </div>
+              <div className="grid grid-rows-8 col-span-1 row-span-1 bg-white rounded-lg">
+                <BarGraph />
+              </div>
+              <div className="grid grid-rows-8 col-span-1 row-span-1 bg-white rounded-lg">
+                <IssueRanking />
+              </div>
             </div>
-            <div className="grid grid-rows-8 col-span-1 row-span-1 bg-white rounded-lg">
-              <WebView url="https://isa.ebdesk.com/" />
-            </div>
-            <div className="grid grid-rows-8 col-span-1 row-span-1 bg-white rounded-lg">
-              <BarGraph />
-            </div>
-            <div className="grid grid-rows-8 col-span-1 row-span-1 bg-white rounded-lg">
-              <IssueRanking />
-            </div>
-            {/* <div className="grid grid-rows-8 col-span-1 row-span-1 bg-white rounded-lg">
-              <LineChart />
-            </div> */}
-            {/* <div className="grid grid-rows-8 col-span-1 row-span-1 bg-white rounded-lg">
-              <PieChart />
-            </div> */}
-          </div>
+          </MapProvider>
         </div>
-        {/* <div className="grid col-span-1">
-          <ChatGPT apiKey={apiKey} />
-        </div> */}
+
         <div>
           <ExecutiveSummary />
           <ChatPopup />

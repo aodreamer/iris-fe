@@ -6,18 +6,18 @@ ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Title, T
 
 const LineChart = () => {
   const data = {
-    labels: ["1", "2", "3", "4", "5"],
+    labels: ["Kab. Bogor", "Kab. Sukabumi", "Kab. Cianjur", "Kab. Bandung", "Kab. Garut"],
     datasets: [
       {
-        label: "Rate Literasi",
-        data: [65, 59, 80, 81, 56, 55, 40],
+        label: "Indeks Literasi",
+        data: [23.8, 23.5, 20.4, 18.9, 19.3],
         fill: false,
         borderColor: "rgba(75,192,192,1)",
         tension: 0.1,
       },
       {
-        label: "Siswa Putus/Mengulang SD",
-        data: [30, 28, 40, 45, 26, 25, 20],
+        label: "Indeks Prestasi",
+        data: [99.1, 99.7, 99.7, 99.5, 99.3],
         fill: false,
         borderColor: "rgba(200,75,192,1)",
         tension: 0.1,

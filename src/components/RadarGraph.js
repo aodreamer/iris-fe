@@ -53,7 +53,7 @@ const RadarGraph = () => {
 
   return (
     <>
-      <div className="h-full row-span-1 text-center text-xl font-bold text-iris-dark-grey bg-iris-grey content-center">SENTIMENT PROPORTION & PERCEPTION RADAR</div>
+      <div className="h-full row-span-1 text-center text-xl font-bold text-white bg-iris-grey content-center">SENTIMENT PROPORTION & PERCEPTION RADAR</div>
       <div className="row-span-7 rounded-lg p-2">
         <div className="mx-auto min-w-full">
           <Radar data={data} options={options} className="mx-auto min-h-40 content-end" />
